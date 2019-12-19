@@ -17,7 +17,7 @@
  </head>
  <body>
  <h1>Daftar disini!</h1>
- <p>Isi form berikut ini, dan click <strong>Daftar</strong> untuk registrasi.</p>
+ <p>Isi form berikut ini, dan klik <strong>Daftar</strong> untuk registrasi.</p>
  <form method="post" action="index.php">
        Name  <input type="text" name="name" id="name"/></br></br>
        Email <input type="text" name="email" id="email"/></br></br>
