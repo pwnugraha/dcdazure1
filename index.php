@@ -78,7 +78,7 @@
                 }
                 echo "</table>";
             } else {
-                echo "<h3>No one is currently registered.</h3>";
+                echo "<h3>Data Pengguna Kosong.</h3>";
             }
         } catch(Exception $e) {
             echo "Failed: " . $e;
