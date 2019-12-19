@@ -16,14 +16,14 @@
  </style>
  </head>
  <body>
- <h1>Register here!</h1>
- <p>Fill in your name and email address, then click <strong>Submit</strong> to register.</p>
- <form method="post" action="index.php" enctype="multipart/form-data" >
+ <h1>Daftar disini!</h1>
+ <p>Isi form berikut ini, dan click <strong>Daftar</strong> untuk registrasi.</p>
+ <form method="post" action="index.php">
        Name  <input type="text" name="name" id="name"/></br></br>
        Email <input type="text" name="email" id="email"/></br></br>
-       Job <input type="text" name="job" id="job"/></br></br>
-       <input type="submit" name="submit" value="Submit" />
-       <input type="submit" name="load_data" value="Load Data" />
+       Address <textarea type="text" name="address" id="address"/></textarea></br></br>
+       <input type="submit" name="submit" value="Daftar" />
+       <input type="submit" name="load_data" value="Tampilkan Data" />
  </form>
  <?php
     $host = "webappserver1.database.windows.net";
@@ -42,38 +42,38 @@
         try {
             $name = $_POST['name'];
             $email = $_POST['email'];
-            $job = $_POST['job'];
+            $address = $_POST['address'];
             $date = date("Y-m-d");
             // Insert data
-            $sql_insert = "INSERT INTO Registration (name, email, job, date) 
+            $sql_insert = "INSERT INTO Users (name, email, address, date) 
                         VALUES (?,?,?,?)";
             $stmt = $conn->prepare($sql_insert);
             $stmt->bindValue(1, $name);
             $stmt->bindValue(2, $email);
-            $stmt->bindValue(3, $job);
+            $stmt->bindValue(3, $address);
             $stmt->bindValue(4, $date);
             $stmt->execute();
         } catch(Exception $e) {
             echo "Failed: " . $e;
         }
 
-        echo "<h3>Your're registered!</h3>";
+        echo "<h3>Anda telah terdaftar!</h3>";
     } else if (isset($_POST['load_data'])) {
         try {
-            $sql_select = "SELECT * FROM Registration";
+            $sql_select = "SELECT * FROM Users";
             $stmt = $conn->query($sql_select);
             $registrants = $stmt->fetchAll(); 
             if(count($registrants) > 0) {
-                echo "<h2>People who are registered:</h2>";
+                echo "<h2>List User:</h2>";
                 echo "<table>";
                 echo "<tr><th>Name</th>";
                 echo "<th>Email</th>";
-                echo "<th>Job</th>";
+                echo "<th>Address</th>";
                 echo "<th>Date</th></tr>";
                 foreach($registrants as $registrant) {
                     echo "<tr><td>".$registrant['name']."</td>";
                     echo "<td>".$registrant['email']."</td>";
-                    echo "<td>".$registrant['job']."</td>";
+                    echo "<td>".$registrant['address']."</td>";
                     echo "<td>".$registrant['date']."</td></tr>";
                 }
                 echo "</table>";
